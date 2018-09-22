@@ -2,6 +2,10 @@ float data[10];
 int currentValue = 0;
 int values[10] ;
 float x = 220.22;
+int joysticX = 0;
+int joysticY = 0;
+boolean choose;
+
 
 float hz = 0;
 
@@ -13,12 +17,15 @@ void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
  pinMode(LED_BUILTIN, OUTPUT);
-
+pinMode(2,INPUT);
 }
 
 void loop() {
 
   Send = millis();
+ joysticX= analogRead(0); 
+ joysticY= analogRead(1); 
+ choose = digitalRead(2); 
 
    if(Serial.available()>0){
     //  LastSerial = SerialTime;
@@ -44,7 +51,9 @@ data[2] = (int) values[2];
  if(Send > Last_Send+3000){
 
   Serial.print(hz);Serial.print(",");
-  Serial.println(x);
+  Serial.print(joysticX);Serial.print(",");
+  Serial.print(joysticY);Serial.print(",");  
+  Serial.println(choose);
 
   Last_Send = Send;
  }
