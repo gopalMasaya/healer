@@ -24,6 +24,8 @@ int pos = -1;
 String choose = "";
 int column = 4;
 float in1=0,in2=0;
+float joystickX = 0; float joystickY = 0;
+float select = 0;
 
 Button btn_serial_up;              // move up through the serial port list
 Button btn_serial_dn;              // move down through the serial port list
@@ -76,7 +78,9 @@ void draw(){
   
   fill(217,179,16);
   textSize(22);
-  text(in1,40,400);
+  text(joystickX ,40,300);
+  text(joystickY ,40,300); 
+  text(select ,40,300); 
   
   //=============================================
   for(int i = 1;i< cols; i++){
@@ -213,11 +217,12 @@ void serialEvent(Serial myPort) {
  
  
  
-  if (Data.length >=1) {
+  if (Data.length >=3) {
  // map them to the range 0-255:
  in1 = Data[0];
- in2 = Data[1];
-
+ joystickX = Data[1];
+ joystickY = Data[2]; 
+ select = Data[3];
  
  
   }
